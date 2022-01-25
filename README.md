@@ -1,0 +1,2 @@
+# kqlcafecommunity
+KQL Cafe community
