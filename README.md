@@ -1,4 +1,4 @@
-# KQL Cafe Community Queries
+# KQL Cafe Community Querries
 
 This repo contains KQL queries shared by the KQL Cafe community. 
 
