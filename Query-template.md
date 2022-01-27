@@ -1,15 +1,13 @@
-# The Title of your query
+# < Insert query name >
 
-Description of the query, what does it do, what information is retrieved
+< Provide query description and usage tips >
 
 ---
 
 ## Query
 
 ```Kusto
-// short description
-kqlcafe
-| distinct shows
+< Insert query string here >
 ```
 
 
@@ -38,8 +36,11 @@ This query can be used to detect the following attack techniques and tactics ([s
 
 ## See also
 
-add links to references here
+< add links to references here >
 
 ## Contributor info
 
 **Contributor:** 
+**GitHub alias:** < your github alias >
+**Organization:** < your org >
+**Contact info:** < email or website >
