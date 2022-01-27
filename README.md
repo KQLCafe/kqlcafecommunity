@@ -6,7 +6,7 @@ This repo contains KQL queries shared by the KQL Cafe community.
 
 Everyone can freely add a file for a new query or improve on existing queries. To help other users locate new queries quickly, we suggest that you:
 
-- Create a new MarkDown file in the relevant folder based on the query submission template
+- Create a new MarkDown file in the relevant folder based on the query [submission template](https://github.com/KQLCafe/kqlcafecommunity/blob/main/Query-template.md)
 - In the new file:
     - Provide a name for the query that represents the components or activities that it searches for, e.g. AzureAD successful break glass account logon
     - Describe the query and provide sufficient guidance when applicable

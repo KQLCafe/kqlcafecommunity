@@ -1,11 +1,15 @@
-# 
+# The Title of your query
+
+Description of the query, what does it do, what information is retrieved
 
 ---
 
 ## Query
 
 ```Kusto
-
+// short description
+kqlcafe
+| distinct shows
 ```
 
 
@@ -33,6 +37,8 @@ This query can be used to detect the following attack techniques and tactics ([s
 | Malware, component |  |  |
 
 ## See also
+
+add links to references here
 
 ## Contributor info
 
