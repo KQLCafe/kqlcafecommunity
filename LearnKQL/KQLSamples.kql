@@ -1,0 +1,152 @@
+// contains
+search "*kustoking*"
+
+// has
+search "kustoking"
+
+// prefix
+search "gianni*"
+
+// suffix
+search "*kustoking.com"
+
+// search in tables
+search in (OfficeActivity, SigninLogs, AAD*) "kustoking"
+
+// search all tables with column
+search UserPrincipalName:"gianni@kustoking.com"
+
+###
+
+// Show and create columns
+search UserPrincipalName:"gianni@kustoking.com"
+| project $table, Email = UserPrincipalName, ClientAppUsed, AppDisplayName, TimeGenerated
+
+// Show columns
+search UserPrincipalName:"gianni@kustoking.com"
+| project-keep $table, ClientAppUsed, AppDisplayName, TimeGenerated
+
+// Remove columns
+search UserPrincipalName:"gianni@kustoking.com"
+| project-away IPAddress
+
+// Rename one or more columns
+search UserPrincipalName:"gianni@kustoking.com"
+| project-rename Email = UserPrincipalName, Table = $table
+
+// Reorder columns
+search UserPrincipalName:"gianni@kustoking.com"
+| project-reorder TimeGenerated, UserPrincipalName, ClientAppUsed, AppDisplayName
+
+###
+
+// Does work
+SigninLogs
+| where UserPrincipalName has "Gianni"
+
+// Does not work
+SigninLogs
+| where UserPrincipalName has "Gia"
+
+// Does work
+SigninLogs
+| where UserPrincipalName contains "Gia"
+
+// Does not work
+SigninLogs
+| where UserPrincipalName contains_cs "Gia"
+
+// Multiple Values
+SigninLogs
+| where UserPrincipalName has_all("Gianni", "KustoKing")
+
+###
+
+// Show distinct
+SigninLogs
+| distinct UserPrincipalName
+
+// Take sample of distinct
+SigninLogs
+| sample-distinct 5 of AppDisplayName
+
+###
+
+// count by AppDisplayName
+SigninLogs
+| summarize count() by AppDisplayName
+
+// create a set of AppDisplayName 
+SigninLogs
+| summarize make_set(AppDisplayName) by UserPrincipalName
+
+// create a set of AppDisplayName by User and Country
+SigninLogs
+| summarize make_set(AppDisplayName) by UserPrincipalName, Location
+
+// Show last record by AppDisplayName and UserPrincipalName
+SigninLogs
+| summarize arg_max(TimeGenerated, *) by UserPrincipalName, AppDisplayName
+
+###
+
+// Combine TimeGenerated - $Table
+search "*kustoking*"
+| extend NewColumn = strcat(TimeGenerated, " - ", $table)
+
+// Combine multiple Columns
+search "*kustoking*"
+| extend NewColumn1 = strcat(TimeGenerated, " - ", $table)
+    , NewColumn2 = strcat(TeamName, " - ", ChannelName)
+
+###
+
+// (Default) Inner unique 
+SigninLogs
+| project TimeGenerated, UserPrincipalName, AppDisplayName
+| join ( SigninLogs
+| sample-distinct 5 of AppDisplayName ) on AppDisplayName
+
+// Inner 
+SigninLogs
+| project TimeGenerated, UserPrincipalName, AppDisplayName
+| join kind=inner ( SigninLogs
+| sample-distinct 5 of AppDisplayName ) on AppDisplayName
+
+// Left anti 
+SigninLogs
+| project TimeGenerated, UserPrincipalName, AppDisplayName
+| join kind=leftanti ( SigninLogs
+| sample-distinct 5 of AppDisplayName ) on AppDisplayName
+
+// Left semi
+SigninLogs
+| project TimeGenerated, UserPrincipalName, AppDisplayName
+| join kind=leftsemi ( SigninLogs
+| sample-distinct 5 of AppDisplayName ) on AppDisplayName
+
+// Left outer 
+SigninLogs
+| project TimeGenerated, UserPrincipalName, AppDisplayName
+| join kind=leftouter ( SigninLogs
+| sample-distinct 5 of AppDisplayName ) on AppDisplayName
+
+// Full outer 
+SigninLogs
+| project TimeGenerated, UserPrincipalName, AppDisplayName
+| join kind=full ( SigninLogs
+| sample-distinct 5 of AppDisplayName ) on AppDisplayName
+
+###
+
+// Take
+SigninLogs
+| take 10
+
+// Limit
+SigninLogs
+| limit 10
+
+// Bonus take but sorted
+SigninLogs
+| top 10 by TimeGenerated
