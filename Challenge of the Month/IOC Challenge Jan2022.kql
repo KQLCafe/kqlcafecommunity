@@ -1,3 +1,10 @@
+// During this months recording we have shown how to work with IoCs,
+// and one of the ways was to use a CSV in combination with SigninLogs or Office Activity
+//
+// This months challenge is to make an hunting query or detection with IoCs
+//
+// The shows examples where:
+
 let List = (externaldata(Netblock:string, Company:string, Count:int) [@"https://raw.githubusercontent.com/KustoKing/SentinelWatchlists/main/ASN-of-CloudProviders.csv"] with (ignoreFirstRecord=true, format="SCsv"));
 SigninLogs
 | where ResultType in(0, 50125, 50140, 70043, 70044)
