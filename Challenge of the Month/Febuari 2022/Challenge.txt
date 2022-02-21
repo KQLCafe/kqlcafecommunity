@@ -1,0 +1,22 @@
+OS Platforms and Versions 
+* Count all unqiue devices based on OS Platform and Version number
+* Count all onboarded devices based on OS Platform and Version number
+
+Unique Devices by public IP address
+* Count unqiue devices seen in the last 30 days per public IP address
+* Why are there devices with a blank IP address
+ 
+AzureAD Joined status 
+* From the DeviceInfo table, get the latest record per DeviceID, and filter the Onboared devices. Count the devices based on if they are Azure AD Joined
+* From the same query, create a set of the device names to identify them
+ 
+Incomming Connections 
+* From the DeviceNetworkEvents table create a list of all incomming connections on port 3389
+* Filter the same query to show all the connections from external ip addresses
+
+Registry Changes 
+* Make an overview of all registry changes based on 
+	the old and new registry names and values
+	initiating processes, filename and command line
+  and count the unique devices ID's 
+* Use the same query as above but find only the changes where de device count is from 2 till 10 devices
